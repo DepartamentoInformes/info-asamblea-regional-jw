@@ -15,7 +15,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 export const consultasFormSchema = z.object({
   nombre: z.string().min(5, "Su nombre completo es obligatorio").max(30, "Ingrese un nombre válido"),
-  congregacion: z.string().min(5, "Ingrese una congregación válida").max(40, "Ingrese una congregación válida"),
   numeroTelefono: z.string().regex(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/, "Ingrese un número de teléfono válido"),
   consulta: z.string().min(10, "Ingrese una consulta válida").max(500, "Ingrese una consulta más corta")
 })
@@ -26,9 +25,6 @@ export const servicioVoluntarioFormSchema = z.object({
   numeroTelefonoPersonal: z.string().regex(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/, "Ingrese un número de teléfono válido"),
   numeroTelefonoAnciano: z.string().regex(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/, "Ingrese un número de teléfono válido"),
   edad: z.string().regex(/^[0-9]*$/, "La edad debe ser un número entero").min(2, "Ingrese una edad válida").max(2, "Ingrese una edad válida"),
-  genero: z.enum(["Masculino", "Femenino"], { message: "Seleccione un género" }),
-  dias: z.array(z.enum(["Viernes", "Sábado", "Domingo"], { message: "Seleccione al menos un día"})).min(1, "Seleccione al menos un día"),
-  horario: z.enum(["Mañana", "Tarde", "Indistinto"], { message: "Seleccione un horario preferido" }),
   comentarios: z.string().max(500, "Ingrese un comentario más corto").optional()
 })
 
@@ -37,7 +33,6 @@ export function ConsultasPage() {
     resolver: zodResolver(consultasFormSchema),
     defaultValues: {
       nombre: "",
-      congregacion: "",
       numeroTelefono: "",
       consulta: ""
     }
@@ -51,9 +46,6 @@ export function ConsultasPage() {
       numeroTelefonoPersonal: "",
       numeroTelefonoAnciano: "",
       edad: "",
-      genero: undefined,
-      dias: [],
-      horario: undefined,
       comentarios: ""
     }
   })
@@ -121,7 +113,7 @@ END:VCARD`;
   const onSubmitServicioVoluntario = async (data: z.infer<typeof servicioVoluntarioFormSchema>) => {
     const botToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
     const chatId = process.env.NEXT_PUBLIC_CHAT_ID;
-    const message = `<b>Nombre</b>: ${data.nombre}\n<b>Congregación</b>: ${data.congregacion}\n<b>Número de Teléfono Personal</b>: ${data.numeroTelefonoPersonal}\n<b>Número de Teléfono del Anciano</b>: ${data.numeroTelefonoAnciano}\n<b>Edad</b>: ${data.edad}\n<b>Género</b>: ${data.genero}\n<b>Días Disponibles</b>: ${data.dias.join(', ')}\n<b>Horario Preferido</b>: ${data.horario}\n<b>Comentarios</b>: ${data.comentarios || "Ninguno"}`;
+    const message = `<b>Nombre</b>: ${data.nombre}\n<b>Congregación</b>: ${data.congregacion}\n<b>Número de Teléfono Personal</b>: ${data.numeroTelefonoPersonal}\n<b>Número de Teléfono del Anciano</b>: ${data.numeroTelefonoAnciano}\n<b>Comentarios</b>: ${data.comentarios || "Ninguno"}`;
     const inlineKeyboard = {
       inline_keyboard: [
         [{
@@ -205,19 +197,6 @@ END:VCARD`;
                               <Input placeholder="Juan Perez" {...field}/>
                             </FormControl>
                             {formConsultas.formState.errors.nombre && <FormMessage>{formConsultas.formState.errors.nombre.message}</FormMessage>}
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={formConsultas.control}
-                        name="congregacion"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Congregación</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Oeste Dorrego" {...field}/>
-                            </FormControl>
-                            {formConsultas.formState.errors.congregacion && <FormMessage>{formConsultas.formState.errors.congregacion.message}</FormMessage>}
                           </FormItem>
                         )}
                       />
@@ -330,122 +309,6 @@ END:VCARD`;
                               <Input placeholder="18" {...field}/>
                             </FormControl>
                             {formServicioVoluntario.formState.errors.edad && <FormMessage>{formServicioVoluntario.formState.errors.edad.message}</FormMessage>}
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={formServicioVoluntario.control}
-                        name="genero"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Género</FormLabel>
-                            <FormControl>
-                              <RadioGroup onValueChange={field.onChange} value={field.value} className="flex items-center space-x-4">
-                                <FormItem>
-                                  <FormControl>
-                                    <RadioGroupItem className='mr-2 mb-[-2px]' value="Masculino"/>
-                                  </FormControl>
-                                  <FormLabel>Masculino</FormLabel>
-                                </FormItem>
-                                <FormItem>
-                                  <FormControl>
-                                    <RadioGroupItem className='mr-2 mb-[-2px]' value="Femenino"/>
-                                  </FormControl>
-                                  <FormLabel>Femenino</FormLabel>
-                                </FormItem>
-                              </RadioGroup>
-                            </FormControl>
-                            {formServicioVoluntario.formState.errors.genero && <FormMessage>{formServicioVoluntario.formState.errors.genero.message}</FormMessage>}
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={formServicioVoluntario.control}
-                        name="dias"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Días Disponibles (seleccione 1 o más)</FormLabel>
-                            <FormField
-                              control={formServicioVoluntario.control}
-                              name="dias"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormControl>
-                                    <Checkbox className="mr-2"
-                                      onCheckedChange={(checked) => {
-                                        return checked ? field.onChange([...field.value, "Viernes"]) : field.onChange(field.value.filter((value) => value !== "Viernes"));
-                                      }}
-                                    />
-                                  </FormControl>
-                                  <FormLabel>Viernes</FormLabel>
-                                </FormItem>
-                              )}
-                            />
-                            <FormField
-                              control={formServicioVoluntario.control}
-                              name="dias"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormControl>
-                                    <Checkbox className="mr-2"
-                                      onCheckedChange={(checked) => {
-                                        return checked ? field.onChange([...field.value, "Sábado"]) : field.onChange(field.value.filter((value) => value !== "Sábado"));
-                                      }}
-                                    />
-                                  </FormControl>
-                                  <FormLabel>Sábado</FormLabel>
-                                </FormItem>
-                              )}
-                            />
-                            <FormField
-                              control={formServicioVoluntario.control}
-                              name="dias"
-                              render={({ field }) => (
-                                <FormItem>
-                                  <FormControl>
-                                    <Checkbox className="mr-2"
-                                      onCheckedChange={(checked) => {
-                                        return checked ? field.onChange([...field.value, "Domingo"]) : field.onChange(field.value.filter((value) => value !== "Domingo"));
-                                      }}
-                                    />
-                                  </FormControl>
-                                  <FormLabel>Domingo</FormLabel>
-                                </FormItem>
-                              )}
-                            />
-                            {formServicioVoluntario.formState.errors.dias && <FormMessage>{formServicioVoluntario.formState.errors.dias.message}</FormMessage>}
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={formServicioVoluntario.control}
-                        name="horario"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Horario Preferido</FormLabel>
-                            <FormControl>
-                              <RadioGroup onValueChange={field.onChange} value={field.value}>
-                                <FormItem>
-                                  <FormControl>
-                                    <RadioGroupItem className="mr-2" value="Mañana"/>
-                                  </FormControl>
-                                  <FormLabel>Mañana</FormLabel>
-                                </FormItem>
-                                <FormItem>
-                                  <FormControl>
-                                    <RadioGroupItem className="mr-2" value="Tarde"/>
-                                  </FormControl>
-                                  <FormLabel>Tarde</FormLabel>
-                                </FormItem>
-                                <FormItem>
-                                  <FormControl>
-                                    <RadioGroupItem className="mr-2" value="Indistinto"/>
-                                  </FormControl>
-                                  <FormLabel>Indistinto</FormLabel>
-                                </FormItem>
-                              </RadioGroup>
-                            </FormControl>
-                            {formServicioVoluntario.formState.errors.horario && <FormMessage>{formServicioVoluntario.formState.errors.horario.message}</FormMessage>}
                           </FormItem>
                         )}
                       />
