@@ -15,3 +15,20 @@ export function renameKeys<T extends Record<string, any>>(obj: T, keyMap: Partia
     return acc
   }, {} as Record<string, any>)
 }
+
+// Detect device type
+export const getDeviceType = (androidUrl: string, iosUrl: string, webUrl: string | null = null) => {
+  if (typeof window === undefined) return androidUrl
+
+  const userAgent = navigator.userAgent
+
+  if (/android/i.test(userAgent)) {
+    return androidUrl
+  }
+
+  if (/iPad|iPhone|iPod/.test(userAgent)) {
+    return iosUrl
+  }
+
+  return webUrl || androidUrl
+}
