@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
+import { interpolateNumber } from "d3-interpolate";
 import { loadMapLayers } from "@/services/map-graph.service";
 import { Button } from "@/components/ui/button";
 import type { Node, Vector, PointOfInterest } from "@/types/mapas.type";
@@ -20,6 +21,7 @@ export function MapaInternoPage() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [showVisor, setShowVisor] = useState(false);
+  const [calcularParams, setCalcularParams] = useState<{from: string, to: string} | null>(null);
 
   // Usar el hook compartido que además establece las variables CSS de color
   const { infoPrincipal, loadingInfoPrincipal } = useInfoPrincipal();
@@ -57,8 +59,9 @@ export function MapaInternoPage() {
   }, [edificioId]);
 
   const handleCalcular = (e: any) => {
-    e.preventDefault();
-    setShowVisor(true);
+  e.preventDefault();
+  setCalcularParams({ from, to });
+  setShowVisor(true);
   };
 
     return (
@@ -83,7 +86,10 @@ export function MapaInternoPage() {
             <select
               className="w-full rounded-lg p-2.5 text-sm border border-gray-300 bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-[var(--secondary-color)] focus:border-[var(--secondary-color)]"
               value={from}
-              onChange={e => setFrom(e.target.value)}
+              onChange={e => {
+                setFrom(e.target.value);
+                setShowVisor(false);
+              }}
               required
             >
               <option value="">Seleccione origen</option>
@@ -95,7 +101,10 @@ export function MapaInternoPage() {
             <select
               className="w-full rounded-lg p-2.5 text-sm border border-gray-300 bg-white text-gray-900 shadow-sm focus:ring-2 focus:ring-[var(--secondary-color)] focus:border-[var(--secondary-color)]"
               value={to}
-              onChange={e => setTo(e.target.value)}
+              onChange={e => {
+                setTo(e.target.value);
+                setShowVisor(false);
+              }}
               required
             >
               <option value="">Seleccione destino</option>
@@ -111,9 +120,9 @@ export function MapaInternoPage() {
           </Button>
         </form>
       )}
-      {showVisor && from && to && (
+      {showVisor && calcularParams && calcularParams.from && calcularParams.to && (
         <div className="mt-8">
-          <MapVisor edificioId={edificioId} nivel="" capa="Capa 1" from={from} to={to} />
+          <MapVisor edificioId={edificioId} nivel="" capa="Capa 1" from={calcularParams.from} to={calcularParams.to} />
         </div>
       )}
     </div>
@@ -215,17 +224,20 @@ export function MapVisor({ edificioId, nivel, capa, from, to }: MapVisorProps) {
     t = Math.max(0, Math.min(1, t));
     const x = a.x + (b.x - a.x) * t;
     const y = a.y + (b.y - a.y) * t;
-    const angle = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+  // Calcular ángulo y suavizar giros bruscos
+  // La flecha gira y apunta siempre hacia el siguiente nodo
+  // Calcular el ángulo y evitar giros mayores a 180°
+    // Mostrar un círculo animado en vez de una flecha
     return (
       <g filter="url(#gmaps-arrow-shadow)">
-        <polygon
-          points="0,-18 32,0 0,18"
+        <circle
+          cx={x}
+          cy={y}
+          r={16}
           fill="#22c55e"
           stroke="#fff"
-          strokeWidth={3}
+          strokeWidth={4}
           opacity={0.98}
-          transform={`translate(${x},${y}) rotate(${angle})`}
-          style={{ transition: 'all 0.2s' }}
         />
       </g>
     );
