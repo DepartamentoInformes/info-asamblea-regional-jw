@@ -130,7 +130,7 @@
   // padding-top: 5rem;
   height: 100%;
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--primary-color);;
 }
 
 /* Mapa que ocupa todo el espacio disponible */
@@ -157,7 +157,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: var(--primary-color);
 }
 
 .servicios-page__map-placeholder-content {
@@ -171,17 +171,17 @@
   width: 4rem;
   height: 4rem;
   margin: 0 auto;
-  color: rgba(14, 116, 144, 0.4);
+  color: var(--secondary-color);
 }
 
 .servicios-page__map-placeholder-title {
   font-size: 1.25rem;
   font-weight: 300;
-  color: rgba(15, 118, 110, 0.7);
+  color: var(--secondary-color);
 }
 
 .servicios-page__map-placeholder-subtitle {
-  color: rgba(14, 116, 144, 0.6);
+  color: var(--accent-color);
   font-weight: 300;
 }
 
@@ -236,7 +236,7 @@
   align-items: center;
   font-size: 1.125rem;
   font-weight: 300;
-  color: rgba(15, 118, 110, 0.8);
+  color: var(--secondary-color);
   letter-spacing: 0.025em;
 }
 
@@ -246,7 +246,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(14, 116, 144, 0.6);
+  color: var(--secondary-color);
   border-radius: 0.5rem;
   transition: colors 0.2s ease;
   background: none;
@@ -255,8 +255,8 @@
 }
 
 .servicios-page__drawer-close:hover {
-  color: rgba(15, 118, 110, 0.8);
-  background-color: rgba(14, 116, 144, 0.1);
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 .servicios-page__drawer-content {
@@ -290,15 +290,13 @@
 }
 
 .servicios-page__place-item:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-color: rgba(14, 116, 144, 0.4);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-color);
+  border-color: var(--secondary-color);
 }
 
 .servicios-page__place-item--selected {
-  background-color: rgba(14, 116, 144, 0.1);
-  border-color: rgba(14, 116, 144, 0.5);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-color);
+  border-color: var(--secondary-color);
 }
 
 .servicios-page__place-item-content {
@@ -316,7 +314,7 @@
 .servicios-page__place-item-icon {
   width: 1.5rem;
   height: 1.5rem;
-  color: rgba(14, 116, 144, 0.7);
+  color: var(--accent-color);
   margin-top: 0.25rem;
   flex-shrink: 0;
 }
@@ -328,7 +326,7 @@
 
 .servicios-page__place-item-name {
   font-weight: 500;
-  color: rgba(19, 78, 74, 0.9);
+  color: var(--secondary-color);
   font-size: 1rem;
   line-height: 1.25;
   margin-bottom: 0.25rem;
@@ -336,7 +334,7 @@
 
 .servicios-page__place-item-address {
   font-size: 0.875rem;
-  color: rgba(14, 116, 144, 0.8);
+  color: var(--accent-color);
   font-weight: 300;
   line-height: 1.625;
 }
@@ -344,7 +342,7 @@
 .servicios-page__place-item-details {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(14, 116, 144, 0.2);
+  border-top: 1px solid var(--secondary-color);
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -356,8 +354,8 @@
 }
 
 .servicios-page__place-item-button {
-  background-color: rgba(14, 116, 144, 0.2);
-  color: rgba(15, 118, 110, 0.8);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   border: 1px solid rgba(14, 116, 144, 0.3);
   font-weight: 300;
   font-size: 0.875rem;
@@ -554,8 +552,8 @@
   bottom: 2rem;
   right: 2rem;
   z-index: 45;
-  background-color: rgba(15, 118, 110, 0.9);
-  color: white;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 9999px;
   padding: 0.75rem 1.5rem;
@@ -568,7 +566,8 @@
 }
 
 .servicios-page__drawer-toggle:hover {
-  background-color: rgba(13, 148, 136, 0.9);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   transform: translateY(-1px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
@@ -692,10 +691,10 @@
   max-width: 42rem;
   margin: 0.5rem auto 0;
   padding: 0.5rem 1rem;
-  background-color: rgba(220, 252, 231, 0.8);
-  border: 1px solid rgba(134, 239, 172, 0.6);
+  background-color: rgb(255 255 255 / 80%);
+  border: 1px solid var(--secondary-color);
   border-radius: 0.5rem;
-  color: rgba(21, 128, 61, 0.9);
+  color: var(--secondary-color);
   font-size: 0.875rem;
   backdrop-filter: blur(4px);
 }

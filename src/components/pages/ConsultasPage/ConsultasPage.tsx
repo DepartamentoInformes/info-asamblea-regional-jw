@@ -21,10 +21,11 @@ export const consultasFormSchema = z.object({
 
 export const servicioVoluntarioFormSchema = z.object({
   nombre: z.string().min(5, "Su nombre completo es obligatorio").max(30, "Ingrese un nombre válido"),
-  congregacion: z.string().min(5, "Ingrese una congregación válida").max(40, "Ingrese una congregación válida"),
   numeroTelefonoPersonal: z.string().regex(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/, "Ingrese un número de teléfono válido"),
-  numeroTelefonoAnciano: z.string().regex(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/, "Ingrese un número de teléfono válido"),
   edad: z.string().regex(/^[0-9]*$/, "La edad debe ser un número entero").min(2, "Ingrese una edad válida").max(2, "Ingrese una edad válida"),
+  congregacion: z.string().min(5, "Ingrese una congregación válida").max(40, "Ingrese una congregación válida"),
+  numeroTelefonoAnciano: z.string().regex(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/, "Ingrese un número de teléfono válido"),
+  nombreAnciano: z.string().min(5, "Ingrese una congregación válida").max(40, "Ingrese una congregación válida"),
   comentarios: z.string().max(500, "Ingrese un comentario más corto").optional()
 })
 
@@ -42,10 +43,11 @@ export function ConsultasPage() {
     resolver: zodResolver(servicioVoluntarioFormSchema),
     defaultValues: {
       nombre: "",
-      congregacion: "",
       numeroTelefonoPersonal: "",
-      numeroTelefonoAnciano: "",
       edad: "",
+      congregacion: "",
+      numeroTelefonoAnciano: "",
+      nombreAnciano: "",
       comentarios: ""
     }
   })
@@ -154,10 +156,10 @@ END:VCARD`;
 
   return (
     <InternalPageLayout>
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen text-gray-900">
       <div className="flex flex-col items-center py-12 px-4">
         <div className="w-full max-w-4xl">
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">Consultas</h3>
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondaryColor">Consultas</h3>
           <p className="text-gray-600 text-lg max-w-3xl mt-3">Llene el formulario con su consulta para que un hermano encargado se comunique con usted</p>
         </div>
         <div className="w-full max-w-4xl mt-8 bg-white rounded-xl shadow-lg border border-gray-100">
@@ -194,7 +196,7 @@ END:VCARD`;
                           <FormItem>
                             <FormLabel>Nombre Completo</FormLabel>
                             <FormControl>
-                              <Input placeholder="Juan Perez" {...field}/>
+                              <Input placeholder="jonathan Gonzales" {...field}/>
                             </FormControl>
                             {formConsultas.formState.errors.nombre && <FormMessage>{formConsultas.formState.errors.nombre.message}</FormMessage>}
                           </FormItem>
@@ -247,6 +249,7 @@ END:VCARD`;
                 <CardContent>
                   <Form {...formServicioVoluntario}>
                     <form onSubmit={formServicioVoluntario.handleSubmit(onSubmitServicioVoluntario)} className="space-y-5">
+                      <h4 className='mb-0 text-gray-400'>Informacion Personal</h4>
                       <FormField
                         control={formServicioVoluntario.control}
                         name="nombre"
@@ -254,22 +257,9 @@ END:VCARD`;
                           <FormItem>
                             <FormLabel>Nombre Completo</FormLabel>
                             <FormControl>
-                              <Input placeholder="Juan Perez" {...field}/>
+                              <Input placeholder="jonathan Gonzales" {...field}/>
                             </FormControl>
                             {formServicioVoluntario.formState.errors.nombre && <FormMessage>{formServicioVoluntario.formState.errors.nombre.message}</FormMessage>}
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={formServicioVoluntario.control}
-                        name="congregacion"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Congregación</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Oeste Dorrego" {...field}/>
-                            </FormControl>
-                            {formServicioVoluntario.formState.errors.congregacion && <FormMessage>{formServicioVoluntario.formState.errors.congregacion.message}</FormMessage>}
                           </FormItem>
                         )}
                       />
@@ -288,6 +278,33 @@ END:VCARD`;
                       />
                       <FormField
                         control={formServicioVoluntario.control}
+                        name="edad"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Edad</FormLabel>
+                            <FormControl>
+                              <Input placeholder="18" {...field}/>
+                            </FormControl>
+                            {formServicioVoluntario.formState.errors.edad && <FormMessage>{formServicioVoluntario.formState.errors.edad.message}</FormMessage>}
+                          </FormItem>
+                        )}
+                      />
+                      <h4 className="mb-0 text-gray-400">Otra informacion</h4>
+                      <FormField
+                        control={formServicioVoluntario.control}
+                        name="congregacion"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Congregación</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Oeste Dorrego" {...field}/>
+                            </FormControl>
+                            {formServicioVoluntario.formState.errors.congregacion && <FormMessage>{formServicioVoluntario.formState.errors.congregacion.message}</FormMessage>}
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={formServicioVoluntario.control}
                         name="numeroTelefonoAnciano"
                         render={({ field }) => (
                           <FormItem>
@@ -301,14 +318,14 @@ END:VCARD`;
                       />
                       <FormField
                         control={formServicioVoluntario.control}
-                        name="edad"
+                        name="nombreAnciano"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Edad</FormLabel>
+                            <FormLabel>Nombre del Anciano</FormLabel>
                             <FormControl>
-                              <Input placeholder="18" {...field}/>
+                              <Input placeholder="jonathan Gonzales" {...field}/>
                             </FormControl>
-                            {formServicioVoluntario.formState.errors.edad && <FormMessage>{formServicioVoluntario.formState.errors.edad.message}</FormMessage>}
+                            {formServicioVoluntario.formState.errors.nombreAnciano && <FormMessage>{formServicioVoluntario.formState.errors.nombreAnciano.message}</FormMessage>}
                           </FormItem>
                         )}
                       />

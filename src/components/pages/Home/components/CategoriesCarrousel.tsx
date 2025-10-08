@@ -14,7 +14,7 @@ export function CategoriesCarrousel({ categories, setApi }: CategoriesCarrouselP
     return (
         <div className="hidden md:block">
             <Carousel setApi={setApi} className="w-full">
-                <CarouselContent className="-ml-2 md:-ml-4">
+                <CarouselContent className="-ml-2 md:-ml-4 pr-7" >
                     {categories.map((category) => (
                         <CarouselItem key={category.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                             <Link href={category.href}>

@@ -66,15 +66,15 @@ export function MapaInternoPage() {
 
     return (
     <div
-      className="max-w-xl mx-auto rounded-lg shadow-lg p-6 mt-6"
+      className="max-w-xl mx-auto rounded-lg p-6 mt-6"
     >
     <div className="w-full max-w-4xl mb-6">
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">Mapa Interno</h3>
+          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondaryColor">Mapa Interno</h3>
           <p className="text-gray-600 text-lg max-w-3xl mt-3">Este mapa le ayudara a encontrar lugares dentro del recinto.</p>
     </div>
   <div className="w-full rounded-lg p-6 bg-white"
        style={{ border: '1px solid var(--secondary-color)' }}>
-    <h2 className="text-2xl font-bold mb-4 text-center text-gray-900">¿A dónde quieres ir?</h2>
+    <h2 className="text-2xl font-bold mb-4 text-center text-secondaryColor">¿A dónde quieres ir?</h2>
       {(loadingEdificio || loadingPois) ? (
         <div className="flex items-center justify-center h-32">
           <span className="text-gray-600">Cargando ubicaciones...</span>

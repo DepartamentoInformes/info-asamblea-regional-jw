@@ -14,9 +14,18 @@ body {
   .text-primaryColor-80 {
     color: color-mix(in srgb, var(--primary-color) 80%, transparent);
   }
+  .bg-secundaryColor-06 {
+    background-color: color-mix(in srgb, var(--secondary-color) 6%, #fff);
+  }
+  .bg-primaryColor-80 {
+    background-color: color-mix(in srgb, var(--primary-color) 80%, transparent);
+  }
   
   .text-secondaryColor-80 {
     color: color-mix(in srgb, var(--secondary-color) 80%, transparent);
+  }
+  .text-secondaryColor {
+    color: var(--secondary-color);
   }
   
   .text-accentColor-80 {
@@ -126,7 +135,7 @@ body {
   }
   /* Force light background and dark text to ensure pages render with white background */
   body {
-    background-color: #ffffff !important;
+    background-color: var(--primary-color) !important;
     color: #111827 !important; /* text-gray-900 */
     @apply bg-white;
   }

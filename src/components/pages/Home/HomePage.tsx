@@ -50,7 +50,7 @@ export function HomePage() {
             <section className="pt-6 pb-10">
               <div className="container mx-auto px-4">
                 <MainHeader mainTitle={infoPrincipal.mainTitle} year={infoPrincipal.year} />
-                <div className="max-w-6xl mx-auto">
+                <div className="max-w-6xl mx-auto relative">
                   <div className="flex justify-between items-center pb-6">
                     <span className="text-2xl md:text-3xl font-bold text-secondaryColor">Categorías</span>
                     <NavigationCarrousel scrollNext={scrollNext} scrollPrev={scrollPrev} />
