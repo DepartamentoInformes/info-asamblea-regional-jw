@@ -18,7 +18,7 @@ export function HomePage() {
     if (isLoading) {
         return <LoadingSpinner />
     }
-
+    const categoriasOrdenadas = [categorias[3], categorias[1], categorias[0], categorias[2]]
     if (hasError) {
         return (
             <div className="flex justify-center items-center w-screen h-screen">
@@ -58,13 +58,13 @@ export function HomePage() {
         
                   {/* Vista mobile: Grid vertical */}
                   <div className="md:hidden space-y-6">
-                    {categorias.map((event) => (
+                    {categoriasOrdenadas.map((event) => (
                       <CategoryCard key={event.id} category={event} />
                     ))}
                   </div>
         
                   {/* Vista desktop: Carousel */}
-                  <CategoriesCarrousel categories={categorias} setApi={setApi}/>
+                  <CategoriesCarrousel categories={categoriasOrdenadas} setApi={setApi}/>
                   
                 </div>
               </div>

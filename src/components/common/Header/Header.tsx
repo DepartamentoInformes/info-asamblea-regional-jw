@@ -59,10 +59,10 @@ export function Header({
         {showNavigation && (
           <nav className={styles.nav}>
             <Link href="/" className={pathname === '/' ? styles.active : ''}>Inicio</Link>
-            <Link href="/consultas" className={pathname === '/consultas' ? styles.active : ''}>Consultas</Link>
             <Link href="/mapa-interno" className={pathname === '/mapa-interno' ? styles.active : ''}>Mapa Interno</Link>
-            <Link href="/transporte" className={pathname === '/transporte' ? styles.active : ''}>Transporte</Link>
             <Link href="/servicios" className={pathname === '/servicios' ? styles.active : ''}>Servicios</Link>
+            <Link href="/consultas" className={pathname === '/consultas' ? styles.active : ''}>Consultas</Link>
+            <Link href="/transporte" className={pathname === '/transporte' ? styles.active : ''}>Transporte</Link>
           </nav>
         )}
       </div>
@@ -72,10 +72,10 @@ export function Header({
         <div className={styles.mobileNavOverlay} onClick={() => setNavOpen(false)}>
           <nav className={styles.mobileNav} onClick={e => e.stopPropagation()}>
             <Link href="/" className={pathname === '/' ? styles.active : ''} onClick={() => setNavOpen(false)}>Inicio</Link>
-            <Link href="/consultas" className={pathname === '/consultas' ? styles.active : ''} onClick={() => setNavOpen(false)}>Consultas</Link>
             <Link href="/mapa-interno" className={pathname === '/mapa-interno' ? styles.active : ''} onClick={() => setNavOpen(false)}>Mapa Interno</Link>
-            <Link href="/transporte" className={pathname === '/transporte' ? styles.active : ''} onClick={() => setNavOpen(false)}>Transporte</Link>
             <Link href="/servicios" className={pathname === '/servicios' ? styles.active : ''} onClick={() => setNavOpen(false)}>Servicios</Link>
+            <Link href="/transporte" className={pathname === '/transporte' ? styles.active : ''} onClick={() => setNavOpen(false)}>Transporte</Link>
+            <Link href="/consultas" className={pathname === '/consultas' ? styles.active : ''} onClick={() => setNavOpen(false)}>Consultas</Link>
           </nav>
         </div>
       )}
