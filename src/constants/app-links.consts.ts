@@ -5,4 +5,7 @@ export const APP_LINKS = {
     WEB_CABIFY: "https://cabify.com/ar/pasajeros",
     APP_STORE_CABIFY: "https://apps.apple.com/es/app/cabify-viaja-como-te-mereces/id476087442",
     PLAY_STORE_CABIFY: "https://play.google.com/store/apps/details?id=com.cabify.rider&hl=es_AR",
+    WEB_MENDOTRAN: "https://owa.visionblo.com/web/mendoza/",
+    APP_STORE_MENDOTRAN: "https://play.google.com/store/apps/details?id=com.wara.mendotran&hl=es_AR",
+    PLAY_STORE_MENDOTRAN: "https://play.google.com/store/apps/details?id=com.wara.mendotran&hl=es_AR",
 }

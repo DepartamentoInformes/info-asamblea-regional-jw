@@ -57,9 +57,31 @@ export function TransportePage() {
                     </div>
                     <div className="w-full max-w-4xl mt-12">
                         <p className="text-gray-600 text-left text-lg mb-6 font-semibold">| Aplicaciones de transporte.</p>
-                        <div className="grid grid-cols-2 gap-4 pt-7">
-                            <AppItem imageSrc="/uberIcon.png" androidUrl={APP_LINKS.PLAY_STORE_UBER} iosUrl={APP_LINKS.APP_STORE_UBER} webUrl={APP_LINKS.WEB_UBER} />
-                            <AppItem imageSrc="/cabifyIcon.png" androidUrl={APP_LINKS.PLAY_STORE_CABIFY} iosUrl={APP_LINKS.APP_STORE_CABIFY} webUrl={APP_LINKS.WEB_CABIFY} />
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-7">
+                            <AppItem 
+                                imageSrc="/uberIcon.png" 
+                                name="Uber"
+                                description="Aplicación de transporte que conecta pasajeros con conductores particulares, permitiendo viajes rápidos y seguros desde el celular."
+                                androidUrl={APP_LINKS.PLAY_STORE_UBER} 
+                                iosUrl={APP_LINKS.APP_STORE_UBER} 
+                                webUrl={APP_LINKS.WEB_UBER} 
+                            />
+                            <AppItem 
+                                imageSrc="/cabifyIcon.png" 
+                                name="Cabify"
+                                description="Plataforma que ofrece traslados cómodos y confiables con conductores profesionales, ideal para uso personal o corporativo."
+                                androidUrl={APP_LINKS.PLAY_STORE_CABIFY} 
+                                iosUrl={APP_LINKS.APP_STORE_CABIFY} 
+                                webUrl={APP_LINKS.WEB_CABIFY} 
+                            />
+                            <AppItem 
+                                imageSrc="/mendotranIcon.webp" 
+                                name="Mendotran"
+                                description="Sistema público de transporte urbano de Mendoza, que integra diferentes líneas de colectivos bajo una misma red y tarjeta SUBE."
+                                androidUrl={APP_LINKS.PLAY_STORE_MENDOTRAN} 
+                                iosUrl={APP_LINKS.APP_STORE_MENDOTRAN} 
+                                webUrl={APP_LINKS.WEB_MENDOTRAN} 
+                            />
                         </div>
                     </div>
 
