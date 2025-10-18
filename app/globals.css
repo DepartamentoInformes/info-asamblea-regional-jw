@@ -132,11 +132,18 @@ body {
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
   /* Force light background and dark text to ensure pages render with white background */
   body {
     background-color: var(--primary-color) !important;
     color: #111827 !important; /* text-gray-900 */
     @apply bg-white;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  /* Ensure no elements cause horizontal overflow on mobile */
+  html {
+    overflow-x: hidden;
   }
 }
